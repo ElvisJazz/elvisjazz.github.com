@@ -70,7 +70,7 @@ disqus-shortname: "panossakkos"
 events:
   - image: "/img/career/spidertocat.png"
     date: "September 2016 - Futrue"
-    description: "Try to be a super cat to save beautiful cats!"
+    description: "Try to be a super cat in NetEase to save beautiful cats!"
   - image: "/img/career/baracktocat.jpg"
     date: "September 2009 - July 2016"
     description: "Learned coding in SEU"
@@ -93,7 +93,7 @@ email: "ElvisJia@qq.com"
 
 social:
   - title: "github"
-    url: "https://github.com/elvisj.github.com"
+    url: "https://github.com/elvisjazz.github.com"
   - title: "rss"
     url: "/feed.xml"
 
