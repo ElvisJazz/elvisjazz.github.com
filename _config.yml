@@ -79,7 +79,9 @@ events:
     description: "Born"
 
 # First image of the Career timeline
-# career-img: "/img/career/default.png"
+career-img: "/img/career/default.png"
+date: "December 1990"
+description: "Born"
 
 ##################
 # Contact layout #
