@@ -1,0 +1,167 @@
+---
+layout: post
+---
+
+<h2>{{ page.title }}</h2>
+<p class='meta'>{{ page.date | date_to_string }} - NanJing</p>
+
+----------
+
+###斐波那契数列###
+![](http://www.opendrive.com/files/MzdfNDIyM19pUDJaVF85MDJm/斐波那契数列.jpg)
+
+###15道使用频率极高的基础算法题###  
+- 合并排序，将两个已经排序的数组合并成一个数组，其中一个数组能容下两个数组的所有元素;【从后往前面存】
+- 合并两个已经排序的单链表;
+- 倒序打印一个单链表; 【递归实现】
+- 给定一个单链表的头指针和一个指定节点的指针，在O(1)时间删除该节点;【删除节点的核心还是将这个节点的下一个节点，代替当前节点】
+- 找到链表倒数第K个节点;
+- 反转单链表;
+- 通过两个栈实现一个队列;
+- 二分查找;
+- 快速排序;
+- 获得一个int型的数中二进制中的1个数;【while (num= num & (num-1))】
+- 输入一个数组，实现一个函数，让所有奇数都在偶数前面;
+- 判断一个字符串是否是另一个字符串的子串;
+- 把一个int型数组中的数字拼成一个串，这个串代表的数字最小;【先将数字转换成字符串存在数组中，在通过qsort排序，在排序用到的比较函数中，将要比较的两个字符串进行组合，如要比较的两个字符串分别是A,B，那么组合成，A+B，和B+A，在比较A+B和B+A，返回strcmp(A+B, B+A)，经过qsort这么一排序,数组就变成从小到大的顺序了，组成的数自然是最小的。】
+- 输入一颗二叉树，输出它的镜像（每个节点的左右子节点交换位置）;
+- 输入两个链表，找到它们第一个公共节点;
+
+### 等概率取数 ###
+
+{% highlight cpp %}
+void randK(int n, int m)
+{ 
+    srand((unsigned int)time(0)); 
+    for (int i = 0; i < n; i++) { 
+        if (rand()%(n-i)<m) { 
+            cout << i << endl; 
+            m--; 
+        } 
+     } 
+}
+{% endhighlight %}
+
+### 分解质因数 ###
+
+{% highlight cpp %}
+void prim(int m, int n)
+ {
+     if (m > n)
+     {
+         while (m%n) n++;
+         m/=n;
+         prim(m, n);
+         cout << n << endl;
+     }
+ }
+{% endhighlight %}
+
+### Q1 ###
+
+{% highlight cpp %}
+unsigned char *p1;  
+unsigned long *p2;  
+p1=(unsigned char *)0x801000;  
+p2=(unsigned long *)0x810000;  
+请问p1+5= 什么？ p2+5= 什么？  
+1代表的是一个单位量  
+p1+5=p1+5*1=p1+5*sizeof(unsigned char)=p1+5*1=0x801000+ox5=0x801005  
+p2+5=p2+5*1=p2+5*sizeof(unsigned long)=p1+5*4=0x810000+20=0x810000+0x14=0x810014  
+{% endhighlight %}
+
+### Q2 ###
+
+{% highlight cpp %}
+void example(char acWelcome[]){
+    printf("%d",sizeof(acWelcome));
+    return;
+}
+void main(){
+    char acWelcome[]="Welcome to Huawei Test";
+printf("%d",sizeof(acWelcome));
+    example(acWelcome);
+    return;
+}  
+{% endhighlight %}  
+Output: 23 4
+
+### Q3 ###
+
+{% highlight cpp %}
+char str[] = "glad to test something";
+char *p = str;
+p++;
+int *p1 = static_cast(p);
+p1++;
+p = static_cast(p1);
+printf("result is %s\n", p); 
+{% endhighlight %}  
+执行p++，移动一个字符得到“lad to test something”，转换为int型，移动四位得到“to test something”
+
+### Q4 ###
+
+设已经有A,B,C,D4个类的定义，程序中A,B,C,D析构函数调用顺序为？
+
+{% highlight cpp %}
+C c;
+void main()
+{
+    A*pa=new A();
+    B b;
+    static D d;
+    delete pa;
+}
+cout：ABDC
+{% endhighlight %}  
+
+
+### 内存泄露检测 ###  
+{% highlight cpp %}
+	#include “stdafx.h”
+	#include 
+	#ifdef _DEBUG
+	#define DEBUG_CLIENTBLOCK   new( _CLIENT_BLOCK, __FILE__, __LINE__)
+	#else
+	#define DEBUG_CLIENTBLOCK
+	#endif
+	#define _CRTDBG_MAP_ALLOC
+	#include 
+	#ifdef _DEBUG
+	#define new DEBUG_CLIENTBLOCK
+	#endif
+	void Exit()
+	{
+	    int i = _CrtDumpMemoryLeaks();
+	    assert( i == 0);
+	}
+	int _tmain(int argc, _TCHAR* argv[])
+	{
+	    atexit(Exit);
+	    int* p = new int();
+	    return 0;
+	}
+{% endhighlight %} 
+
+**判断一个单链表是否有环及环的链接点**  
+给定一个单链表，只给出头指针h：  
+1、如何判断是否存在环？  
+2、如何知道环的长度？  
+3、如何找出环的连接点在哪里？  
+4、带环链表的长度是多少？  
+
+解法：  
+1、对于问题1，使用追赶的方法，设定两个指针slow、fast，从头指针开始，每次分别前进1步、2步。如存在环，则两者相遇；如不存在环，fast遇到NULL退出。  
+2、对于问题2，记录下问题1的碰撞点p，slow、fast从该点开始，再次碰撞所走过的操作数就是环的长度s。  
+3、问题3：有定理：碰撞点p到连接点的距离=头指针到连接点的距离，因此，分别从碰撞点、头指针开始走，相遇的那个点就是连接点。(证明在后面附注)  
+4、问题3中已经求出连接点距离头指针的长度，加上问题2中求出的环的长度，二者之和就是带环单链表的长度  
+附注  
+问题2的证明如下：  
+假设单链表的总长度为L，头结点到环入口的距离为a，环入口到快慢指针相遇的结点距离为x，环的长度为r，慢指针总共走了s步，则快指针走了2s步。另外，快指针要追上慢指针的话快指针至少要在环里面转了一圈多(假设转了n圈加x的距离)，得到以下关系：  
+    s = a + x;  
+    2s = a + nr + x;  
+    =>a + x = nr;  
+    =>a = nr - x;  
+由上式可知：若在头结点和相遇结点分别设一指针，同步(单步)前进，则最后一定相遇在环入口结点，搞掂！
+
+----------
