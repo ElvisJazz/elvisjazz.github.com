@@ -74,9 +74,6 @@ events:
   - image: "/img/career/baracktocat.jpg"
     date: "September 2009 - July 2016"
     description: "Learned coding in SEU"
-  - image: "/img/career/default.png"
-    date: "December 1990"
-    description: "Born"
 
 # First image of the Career timeline
 career-img: "/img/career/default.png"
